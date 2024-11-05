@@ -11,9 +11,12 @@ class TodoController extends Controller
 
     public function index($filter){
         return Inertia::render('Task/Index', [
-            'filter' => 'Today'
+            'filter' => ucfirst($filter)
           ]);
+    }
 
 
+    public function store(){
+        
     }
 }
