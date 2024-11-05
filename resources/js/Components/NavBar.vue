@@ -1,5 +1,5 @@
 <template>
-    <div class="flex">
+    <div class="">
       <button
         @click="toggleSidebar"
         type="button"

@@ -1,12 +1,12 @@
 <template>
-<label class="w-full max-w-xs form-control">
+<label class="w-full form-control">
   <div class="label">
     <span class="label-text">{{ label }}</span>
 
   </div>
 
 
-  <input :type="type" v-model="model" :placeholder="placeholder" class="w-full max-w-xs input input-bordered" />
+  <input :type="type" v-model="model" :placeholder="placeholder" class="w-full input input-bordered" />
   <div class="label">
     <span class="label-text-alt">{{ hint }}</span>
 

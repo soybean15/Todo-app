@@ -14,5 +14,7 @@ Route::prefix('task')->group(function(){
 
     Route::get('/{filter}',[TodoController::class,'index'] )->name('task.index');
     Route::post('/store',[TodoController::class,'store'] )->name('task.store');
+    Route::post('/toggle-task',[TodoController::class,'toggleTaskCompletion'] )->name('task.toggle-completion');
+
 });
 

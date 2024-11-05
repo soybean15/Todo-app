@@ -14,7 +14,7 @@
 
             <form @submit.prevent="submitForm">
 
-                <Input label="Title" type="text" v-model="form.title" />
+                <Input  label="Title" placeholder="Add Title"  type="text" v-model="form.title" />
                 <div class="text-red-400" v-if="form.errors.title">{{ form.errors.title }}</div>
                 <Input label="Description" placeholder="Add Description" type="text" v-model="form.description" />
                 <div class="text-sm text-red-400" v-if="form.errors.description">{{ form.errors.description }}</div>
@@ -38,8 +38,7 @@
 
 <script setup>
 import Input from './Input.vue';
-import { ref } from 'vue';
-import { router, useForm } from '@inertiajs/vue3'
+import {  useForm } from '@inertiajs/vue3'
 
 const form = useForm({
     title: null,
@@ -49,7 +48,6 @@ const form = useForm({
 })
 
 
-
 const submitForm = () => {
     form.post('/task/store',
         {
@@ -57,9 +55,6 @@ const submitForm = () => {
             onSuccess: () => onClose(),
             onError:(e)=> console.log(e)
         })
-
-
-    console.log(form)
 
 }
 

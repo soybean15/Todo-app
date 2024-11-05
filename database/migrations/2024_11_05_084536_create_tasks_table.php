@@ -15,12 +15,13 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->string('status')->nullable();
-            $table->integer('order')->nullable();
-            $table->string('description')->nullable();
-            $table->date('start_date')->nullable();
 
+            $table->string('description')->nullable();
+            $table->boolean('is_pinned')->default(false);
+            $table->dateTime('completed_at')->nullable();
+            $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
+            $table->softDeletes();
             $table->foreignId('parent_id')->nullable()->constrained('tasks')->onDelete('cascade'); // Self-referential foreign key
             $table->timestamps();
         });

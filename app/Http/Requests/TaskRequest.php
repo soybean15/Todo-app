@@ -24,6 +24,7 @@ class TaskRequest extends FormRequest
         return [
             'title'=>'required',
             'description'=>'required',
+
             'start_date'=>'required',
             'due_date'=>'required',
         ];

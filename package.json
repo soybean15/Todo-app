@@ -17,6 +17,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
-        "@inertiajs/vue3": "^1.2.0"
+        "@inertiajs/vue3": "^1.2.0",
+        "dayjs": "^1.11.13",
+        "moment": "^2.30.1"
     }
 }

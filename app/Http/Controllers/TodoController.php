@@ -11,25 +11,46 @@ class TodoController extends Controller
 {
 
 
-    public function index($filter='today'){
+    public function index($filter = 'today')
+    {
         return Inertia::render('Task/Index', [
-            'filter' => ucfirst($filter)
-          ]);
+            'filter' => ucfirst($filter),
+            'tasks'=>Task::filter($filter)->get()
+        ]);
     }
 
 
-    public function store(TaskRequest $request){
+    public function store(TaskRequest $request)
+    {
+        Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+    }
 
 
-   // Access validated data directly from the request
-   $task = Task::create([
-    'title' => $request->title, // Access validated title
-    'description' => $request->description, // Access validated description
-    'status' => 'pending', // Default status
-    'order' => 0, // You can set this based on your requirements
-    // Add other fields if necessary
-]);
+    public function toggleTaskCompletion(Request $request){
+        // dd($request->task_id);
 
-        // return to_route('task.index');
+        $task = Task::find($request->task_id);
+        if ($task->completed_at) {
+
+            $task->update(['completed_at'=>null]);
+        } else {
+
+            $task->touch('completed_at');
+        }
+
+
+    }
+
+
+    public function destroy(Request $request){
+
+
+        $task = Task::find($request->task_id);
+
+        $task->delete();
+
     }
 }
