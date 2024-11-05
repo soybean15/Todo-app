@@ -16,6 +16,7 @@
                     {{ item.title }}
 
                     <div  class="mx-3 badge badge-info" v-if="item.completed_at">
+                        
                         Completed {{ formatDate(item.completed_at)}}
 
                     </div>
