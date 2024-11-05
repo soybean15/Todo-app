@@ -12,6 +12,7 @@ Route::get('/', function () {
 
 Route::prefix('task')->group(function(){
 
-    Route::get('/{filter}',[TodoController::class,'index'] );
+    Route::get('/{filter}',[TodoController::class,'index'] )->name('task.index');
+    Route::post('/store',[TodoController::class,'store'] )->name('task.store');
 });
 

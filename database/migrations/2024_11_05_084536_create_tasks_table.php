@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->integer('order')->nullable();
             $table->string('description')->nullable();
+            $table->date('start_date')->nullable();
+
             $table->date('due_date')->nullable();
             $table->foreignId('parent_id')->nullable()->constrained('tasks')->onDelete('cascade'); // Self-referential foreign key
             $table->timestamps();
