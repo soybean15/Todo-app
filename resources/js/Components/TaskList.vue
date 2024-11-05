@@ -1,6 +1,6 @@
 <template>
     <div v-if="success.message">
-        <div class="toast toast-center">
+        <div class="toast toast-start">
 
             <div class="flex alert alert-success flex-between">
                 <span v-if="success.message">{{ success.message }}</span>
@@ -14,7 +14,17 @@
             <div class="flex items-start justify-between">
                 <div class="text-lg font-bold">
                     {{ item.title }}
-                    <div class="text-xs font-normal"> {{ formatDate(item.created_at) }}</div>
+
+                    <div  class="mx-3 badge badge-info" v-if="item.completed_at">
+                        Completed {{ formatDate(item.completed_at)}}
+
+                    </div>
+                    <div class="mx-3 badge badge-secondary" v-else>Starts {{ formatDate(item.start_date) }}</div>
+
+
+
+
+                    <div class="text-xs font-normal text-gray-600"> Created: {{ formatDate(item.created_at) }}</div>
                 </div>
                 <div class="dropdown dropdown-bottom dropdown-end">
                     <div tabindex="0" role="button" class="m-1 btn btn-ghost btn-xs">
@@ -29,7 +39,7 @@
                     <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                         <li>
 
-                            <Link :href="`/task/show/${item.id}`">Edit</Link>
+                            <Link :href="`/task/show/${item.id}`">View</Link>
 
 
                         </li>
@@ -150,11 +160,6 @@ const formatDate = (dateString) => {
 
 
 
-const handleOpenModal = (item) => {
-    console.log('Modal opened'); // This function will be called when the modal opens
-    return
-    // Additional logic to handle when the modal is opened
-};
 </script>
 
 <style></style>

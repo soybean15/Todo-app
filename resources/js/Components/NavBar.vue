@@ -30,41 +30,21 @@
                     <li>
                         <a
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                            <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                viewBox="0 0 22 21">
-                                <path
-                                    d="M16.975 11H10V4.025a1 1 0 0 0-1.066-.998 8.5 8.5 0 1 0 9.039 9.039.999.999 0 0 0-1-1.066h.002Z" />
-                            </svg>
-                            <span class="ms-3">Todo App</span>
+
+                            <span class="text-lg font-bold ms-3">Todo App</span>
                         </a>
                     </li>
-                    <li>
-                        <Link href="/task/upcoming"
+
+                    <li v-for="(item, index) in menu" :key="index">
+                        <Link :href="item.route"
+                        :class="{'bg-gray-300 dark:bg-gray-700': isActive(item.route)}"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 18 18">
-                            <path
-                                d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Upcoming</span>
-                        <span
-                            class="inline-flex items-center justify-center px-2 text-sm font-medium text-gray-800 bg-gray-100 rounded-full ms-3 dark:bg-gray-700 dark:text-gray-300">Pro</span>
+
+                        <span class="flex-1 ms-3 whitespace-nowrap">{{ item.label }}</span>
+
                         </Link>
                     </li>
-                    <li>
-                        <Link href="/task/today"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                        <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path
-                                d="M10 1a9 9 0 0 0-8.482 5.12A7.992 7.992 0 0 0 10 20a7.992 7.992 0 0 0 8.482-5.88A9 9 0 0 0 10 1Zm1 10h-2v2h2v-2Zm0-4h-2v2h2V7Z" />
-                        </svg>
-                        <span class="flex-1 ms-3 whitespace-nowrap">Today</span>
-                        </Link>
-                    </li>
+
                 </ul>
             </div>
         </aside>
@@ -80,13 +60,27 @@
 
 <script setup>
 import { ref } from 'vue';
-import { Link } from '@inertiajs/vue3';
+import { Link,usePage } from '@inertiajs/vue3';
 
 
 
 const sidebarOpen = ref(false);
 
+const menu =
+[
+    {label:'Upcoming',route:'/task/upcoming'},
+    {label:'Today',route:'/task/today'},
+    {label:'Overdue',route:'/task/overdue'},
 
+
+];
+
+
+const { url } = usePage();
+
+const isActive = (route) => {
+  return url.includes(route);
+};
 const toggleSidebar = () => {
     sidebarOpen.value = !sidebarOpen.value;
 };

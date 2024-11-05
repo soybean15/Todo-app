@@ -18,9 +18,6 @@
 
         <form @submit.prevent="submitForm">
 
-
-
-
             <Input label="Title" placeholder="Add Title" type="text" v-model="form.title" />
             <div class="text-red-400" v-if="form.errors.title">{{ form.errors.title }}</div>
             <Input label="Description" placeholder="Add Description" type="text" v-model="form.description" />
@@ -36,7 +33,7 @@
 
 
             <div class="flex justify-end space-x-2">
-             
+
                 <button class="btn btn-accent" type="submit">Update</button>
 
             </div>

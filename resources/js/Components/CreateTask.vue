@@ -70,13 +70,11 @@ const submitForm = () => {
 
 }
 
-const task = ref({
-    title: '',
-    description: '',
-});
+
 
 const onClose = () => {
     document.getElementById('my_modal_3').close();
+    form.reset()
 }
 const openModal=()=>{
     document.getElementById('my_modal_3').showModal()

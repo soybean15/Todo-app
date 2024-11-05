@@ -34,6 +34,9 @@ class Task extends Model
             case 'upcoming':
                 $builder->where('start_date','>',Carbon::today());
                 break;
+            case 'overdue':
+                    $builder->where('start_date','<',Carbon::today());
+                    break;
             default :
                 $builder;
         }

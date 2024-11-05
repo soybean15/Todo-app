@@ -20,7 +20,9 @@ class TodoController extends Controller
 
         return Inertia::render('Task/Index', [
             'filter' => ucfirst($filter),
-            'tasks' => Task::filter($filter)->get(),
+            'tasks' =>  Task::filter($filter)
+            ->orderBy('completed_at', 'asc') // Sort by completed_at in ascending order
+            ->get(),
             'progress'=>$progress
         ]);
     }
@@ -42,7 +44,7 @@ class TodoController extends Controller
 
         $task = Task::find($request->id);
         $task->update($request->all());
-      
+
     }
 
     public function show(Task $task)
