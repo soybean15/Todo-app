@@ -19,7 +19,9 @@ class Task extends Model
         'parent_id',
         'order',
         'status',
-        'completed_at'
+        'completed_at',
+        'start_date',
+        'due_date',
     ];
 
     public function scopeFilter(Builder $builder,$filter){

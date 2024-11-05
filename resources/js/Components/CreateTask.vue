@@ -1,6 +1,8 @@
 <template>
     <!-- You can open the modal using ID.showModal() method -->
-    <button class="btn" onclick="my_modal_3.showModal()">Create Task</button>
+
+    <slot :open-modal="openModal"></slot>
+
     <dialog id="my_modal_3" class="modal">
         <div class="modal-box">
             <!-- <button @click="onClose" class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">Close</button> -->
@@ -12,7 +14,12 @@
             <h3 class="text-lg font-bold">Add Task</h3>
 
 
+
+
             <form @submit.prevent="submitForm">
+
+
+
 
                 <Input  label="Title" placeholder="Add Title"  type="text" v-model="form.title" />
                 <div class="text-red-400" v-if="form.errors.title">{{ form.errors.title }}</div>
@@ -39,13 +46,18 @@
 <script setup>
 import Input from './Input.vue';
 import {  useForm } from '@inertiajs/vue3'
+import {ref} from 'vue';
 
-const form = useForm({
-    title: null,
-    description: null,
-    start_date: null,
-    due_date: null
-})
+
+
+
+  const form = useForm({
+    title: '',
+    description: '',
+    start_date:  '',
+    due_date:  ''
+});
+
 
 
 const submitForm = () => {
@@ -58,9 +70,19 @@ const submitForm = () => {
 
 }
 
+const task = ref({
+    title: '',
+    description: '',
+});
+
 const onClose = () => {
     document.getElementById('my_modal_3').close();
 }
+const openModal=()=>{
+    document.getElementById('my_modal_3').showModal()
+
+}
+
 
 </script>
 
