@@ -17,7 +17,7 @@
 
             </create-task>
             <div >
-                <radial-progress :value="progress" :color="filter=='Today'?'accent':filter=='Upcoming'?'secondary':'error'"/>
+                <radial-progress :value="progress" :color="color"/>
 
             </div>
 
@@ -26,8 +26,7 @@
 
 
         <div class="">
-            <TaskList :items="tasks" />
-
+            <TaskList :items="tasks"  :color="color" />
         </div>
 
 
@@ -42,16 +41,20 @@ import CreateTask from '../../Components/CreateTask.vue';
 import NavBar from '../../Components/NavBar.vue';
 import TaskList from '../../Components/TaskList.vue';
 import RadialProgress from '../../Components/RadialProgress.vue';
+import { computed } from 'vue';
 
-
-defineProps({
+const props = defineProps({
     filter: String,
     tasks: Array,
     progress: Number,
     totalTask:Number,
     completedTasks:Number})
 
-
+const color = computed(() => {
+  if (props.filter === 'Today') return 'accent';
+  if (props.filter === 'Upcoming') return 'secondary';
+  return 'error';
+});
 
 </script>
 

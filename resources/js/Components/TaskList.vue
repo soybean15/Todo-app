@@ -8,15 +8,6 @@
                 <div class="text-lg font-bold">
                     {{ item.title }}
 
-                    <!-- <div  class="mx-3 badge badge-info" v-if="item.completed_at">
-
-                        Completed {{ formatDate(item.completed_at)}}
-
-                    </div>
-                    <div class="mx-3 badge badge-secondary" v-else>Starts {{ formatDate(item.start_date) }}</div>
- -->
-
-
 
                     <div class="text-xs font-normal text-gray-600"> Created: {{ formatDate(item.created_at) }}</div>
                 </div>
@@ -62,7 +53,13 @@ import { useForm ,Link} from '@inertiajs/vue3'
 import Toast from './Toast.vue';
 
 
-
+const props = defineProps({
+    items: {
+        type: Array,
+        required: true
+    },
+    color:String
+});
 const success = ref({
     action: null,
     message: null,
@@ -137,12 +134,7 @@ const restoreTask = (task) => {
 
 
 
-const props = defineProps({
-    items: {
-        type: Array,
-        required: true
-    }
-});
+
 
 const formatDate = (dateString) => {
 
