@@ -1,13 +1,6 @@
 <template>
-    <div v-if="success.message">
-        <div class="toast toast-start">
 
-            <div class="flex alert alert-success flex-between">
-                <span v-if="success.message">{{ success.message }}</span>
-                <div class="" v-if="success.action == 'delete'" @click="restoreTask(success._object)">Undo</div>
-            </div>
-        </div>
-    </div>
+<toast :success="success" :onUndo="restoreTask"/>
     <div class="my-3" v-for="item in items" :key="item.id">
 
         <div class="p-5 rounded-lg bg-accent" :class="{ 'opacity-50': item.completed_at }">
@@ -15,13 +8,13 @@
                 <div class="text-lg font-bold">
                     {{ item.title }}
 
-                    <div  class="mx-3 badge badge-info" v-if="item.completed_at">
-                        
+                    <!-- <div  class="mx-3 badge badge-info" v-if="item.completed_at">
+
                         Completed {{ formatDate(item.completed_at)}}
 
                     </div>
                     <div class="mx-3 badge badge-secondary" v-else>Starts {{ formatDate(item.start_date) }}</div>
-
+ -->
 
 
 
@@ -58,9 +51,6 @@
             </div>
         </div>
 
-
-
-
     </div>
 </template>
 
@@ -68,9 +58,9 @@
 
 import { defineProps, ref } from 'vue';
 import moment from 'moment';
-import { useForm } from '@inertiajs/vue3'
+import { useForm ,Link} from '@inertiajs/vue3'
+import Toast from './Toast.vue';
 
-import { Link } from '@inertiajs/vue3';
 
 
 const success = ref({

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Inertia\Inertia;
 
 class TodoController extends Controller
@@ -23,19 +24,33 @@ class TodoController extends Controller
             'tasks' =>  Task::filter($filter)
             ->orderBy('completed_at', 'asc') // Sort by completed_at in ascending order
             ->get(),
-            'progress'=>$progress
+            'progress'=>$progress,
+            'totalTask'=>$totalTasks,
+            'completedTasks'=>$completedTasks
         ]);
     }
 
 
     public function store(TaskRequest $request)
     {
-        Task::create([
+        $task =Task::create([
             'title' => $request->title,
             'description' => $request->description,
             'start_date' => $request->start_date,
             'due_date' => $request->due_date
         ]);
+
+
+    if (Carbon::parse($task->start_date)->isToday()) {
+
+        return redirect('/task/today');
+    }
+
+    if (Carbon::parse($task->start_date)->isAfter(Carbon::today())) {
+        return redirect('/task/upcoming');
+    }
+
+    return redirect('/task/overdue');
     }
 
 
@@ -60,8 +75,6 @@ class TodoController extends Controller
 
     public function toggleTaskCompletion(Request $request)
     {
-        // dd($request->task_id);
-
         $task = Task::find($request->task_id);
         if ($task->completed_at) {
 
@@ -77,8 +90,6 @@ class TodoController extends Controller
     {
 
         $task = Task::find($request->task_id);
-
-        // dd($task);
         $task->delete();
     }
     public function restore(Request $request)

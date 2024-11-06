@@ -1,7 +1,7 @@
 <template>
 
 
-    <div class="radial-progress text-primary" :style="{ '--value': value  }" role="progressbar">
+    <div class=" radial-progress text-info"    :style="{ '--value': value  }" role="progressbar">
       {{ value.toFixed(2) }}%
     </div>
   </template>
@@ -14,6 +14,7 @@
       type: Number,
       required: true,
     },
+    color: String
   });
   </script>
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/', function () {
-    return inertia('Index/Index');
+    return redirect('task/today');
 });
 
 Route::prefix('task')->group(function(){
