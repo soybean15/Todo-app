@@ -11,7 +11,7 @@
                 <button class="absolute btn btn-sm btn-circle btn-ghost right-2 top-2">✕</button>
             </form>
 
-            <h3 class="text-lg font-bold">Add Task</h3>
+            <h3 class="text-lg font-bold">Add Todo</h3>
 
 
 
